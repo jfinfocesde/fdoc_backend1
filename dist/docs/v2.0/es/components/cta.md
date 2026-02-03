@@ -5,7 +5,7 @@ Bloque para destacar una acción con título, botones y contenido.
 ## Sintaxis
 
 ````markdown
-+++cta
+```cta
 ---
 title: "¿Listo para empezar?"
 buttons:
@@ -17,5 +17,5 @@ buttons:
     variant: "secondary"
 ---
 Este es el contenido principal del CTA. Explica por qué el usuario debería realizar la acción.
-+++
+```
 ````

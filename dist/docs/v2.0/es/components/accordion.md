@@ -5,7 +5,7 @@ Oculta y muestra contenido en secciones expandibles.
 ## Sintaxis
 
 ````markdown
-+++accordion
+```accordion
 ---
 allowMultiple: false # true para permitir abrir varios a la vez
 ---
@@ -17,5 +17,5 @@ Contenido del segundo ítem.
 
 ### ¿Y el tercero?
 Contenido del tercer ítem.
-+++
+```
 ````

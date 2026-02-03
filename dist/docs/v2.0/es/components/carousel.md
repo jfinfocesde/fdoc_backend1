@@ -3,7 +3,7 @@
 Carrusel de imágenes con reproducción automática y puntos de navegación.
 
 ````markdown
-+++carousel
+```carousel
 ---
 autoPlay: true
 interval: 3000
@@ -16,5 +16,5 @@ items:
   - src: "/assets/images/carousel/step-3.jpg"
     alt: "Comprende el flujo con un diagrama"
 ---
-+++
+```
 ````

@@ -5,7 +5,7 @@ Muestra múltiples imágenes en una cuadrícula interactiva con lightbox.
 ## Sintaxis
 
 ````markdown
-+++gallery
+```gallery
 ---
 columns: 3
 items:
@@ -16,5 +16,5 @@ items:
   - src: "https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?w=400"
     alt: "Bosque brumoso"
 ---
-+++
+```
 ````

@@ -5,7 +5,7 @@ Crea una cuadrícula de tarjetas enlazables para destacar características o enl
 ## Sintaxis
 
 ````markdown
-+++cards
+```cards
 ---
 columns: 2
 items:
@@ -18,5 +18,5 @@ items:
     href: "/ruta/a/otra/pagina"
     content: "Una breve descripción de la segunda característica."
 ---
-+++
+```
 ````

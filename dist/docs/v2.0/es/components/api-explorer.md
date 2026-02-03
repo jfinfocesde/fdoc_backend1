@@ -5,7 +5,7 @@ Documenta y prueba endpoints de API de forma estructurada.
 ## Sintaxis
 
 ````markdown
-+++api-explorer
+```api-explorer
 ---
 baseUrl: "https://jsonplaceholder.typicode.com"
 endpoints:
@@ -22,5 +22,5 @@ endpoints:
           type: "integer"
           example: 1
 ---
-+++
+```
 ````

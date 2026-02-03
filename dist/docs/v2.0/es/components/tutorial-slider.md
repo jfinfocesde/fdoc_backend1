@@ -3,7 +3,7 @@
 Deslizador interactivo con contenido y medios por paso.
 
 ````markdown
-+++tutorial-slider
+```tutorial-slider
 ---
 steps:
   - content: |
@@ -33,5 +33,5 @@ steps:
           U->>A: Envía datos
           A-->>U: Respuesta
 ---
-+++
+```
 ````

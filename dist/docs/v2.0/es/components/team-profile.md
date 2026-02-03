@@ -3,7 +3,7 @@
 Presenta miembros del equipo con columnas configurables y enlaces sociales.
 
 ````markdown
-+++team-profile
+```team-profile
 ---
 columns: 3
 members:
@@ -27,5 +27,5 @@ members:
       - icon: "LinkedIn"
         url: "https://linkedin.com/in/carlos"
 ---
-+++
+```
 ````

@@ -3,7 +3,7 @@
 Tarjetas de métricas con colores temáticos y distribución en columnas.
 
 ````markdown
-+++stat-cards
+```stat-cards
 ---
 columns: 4
 items:
@@ -24,5 +24,5 @@ items:
     label: "Proyectos guiados"
     color: "teal"
 ---
-+++
+```
 ````

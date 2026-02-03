@@ -3,7 +3,7 @@
 Narrativa por pasos con panel de medios fijo y progreso.
 
 ````markdown
-+++scrollytelling
+```scrollytelling
 ---
 steps:
   - date: "2024-01-10"
@@ -43,5 +43,5 @@ steps:
           B -->|Sí| C[Camino A]
           B -->|No| D[Camino B]
 ---
-+++
+```
 ````

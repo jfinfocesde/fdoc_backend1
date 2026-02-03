@@ -5,7 +5,7 @@ Crea un cuestionario de opción múltiple.
 ## Sintaxis
 
 ````markdown
-+++quiz
+```quiz
 ---
 questions:
   - text: "¿De qué color es el cielo?"
@@ -21,5 +21,5 @@ questions:
       - 5
     answer: "4"
 ---
-+++
+```
 ````

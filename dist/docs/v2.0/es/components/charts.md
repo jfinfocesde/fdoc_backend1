@@ -5,7 +5,7 @@ Gráfica configurada con Chart.js usando YAML para tipo y datos.
 ## Ejemplo Básico
 
 ````markdown
-+++charts
+```charts
 ---
 title: "Progreso por Semana"
 type: "bar"
@@ -19,13 +19,13 @@ options:
     legend:
       position: "bottom"
 ---
-+++
+```
 ````
 
 ## Ejemplo del Tutorial (Ventas por Trimestre)
 
 ````markdown
-+++charts
+```charts
 ---
 type: 'bar'
 title: 'Ventas por Trimestre'
@@ -35,13 +35,13 @@ data:
     - label: 'Ventas (en millones)'
       data: [12, 19, 3, 5]
 ---
-+++
+```
 ````
 
 ## Ejemplo de Línea
 
 ````markdown
-+++charts
+```charts
 ---
 type: 'line'
 title: 'Tendencia de Usuarios'
@@ -53,5 +53,5 @@ data:
       borderColor: '#3b82f6'
       backgroundColor: 'transparent'
 ---
-+++
+```
 ````

@@ -5,7 +5,7 @@ Crea un diseño de cuadrícula flexible para organizar contenido en columnas.
 ## Sintaxis
 
 ````markdown
-+++grid
+```grid
 ---
 columns: 3 # 2, 3 o 4
 ---
@@ -21,5 +21,5 @@ Contenido de la segunda columna.
 
 ### Columna 3
 Contenido de la tercera columna.
-+++
+```
 ````

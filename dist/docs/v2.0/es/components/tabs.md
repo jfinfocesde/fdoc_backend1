@@ -5,7 +5,7 @@ Muestra el mismo fragmento de código en diferentes lenguajes mediante pestañas
 ## Sintaxis
 
 ````markdown
-+++tabs
+```tabs
 ---[tab title="JavaScript" lang="js"]---
 function greet(name) {
   return `Hello, ${name}!`;
@@ -21,5 +21,5 @@ print(greet('World'))
 ---[tab title="Shell" lang="sh"]---
 # Ejemplo con otro lenguaje
 echo "Hola, Mundo"
-+++
+```
 ````

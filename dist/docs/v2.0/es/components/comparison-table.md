@@ -3,7 +3,7 @@
 Tabla comparativa con soporte para valores especiales y resaltar columnas.
 
 ````markdown
-+++comparison-table
+```comparison-table
 ---
 headers:
   - "Característica"
@@ -15,5 +15,5 @@ rows:
   - ["Material descargable", "true", "n/a"]
   - ["Soporte de comunidad", "false", "true"]
 ---
-+++
+```
 ````

@@ -3,7 +3,7 @@
 Árbol de archivos con resaltado y anotaciones.
 
 ````markdown
-+++file-tree
+```file-tree
 ---
 highlight:
   - "src/components"
@@ -22,5 +22,5 @@ src/
 │   ├── Home.tsx
 │   └── About.tsx
 └── main.tsx
-+++
+```
 ````

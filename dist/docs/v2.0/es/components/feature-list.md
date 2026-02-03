@@ -3,7 +3,7 @@
 Lista de características con íconos y contenido en Markdown.
 
 ````markdown
-+++feature-list
+```feature-list
 ---
 items:
   - title: "Aprendizaje Práctico"
@@ -19,5 +19,5 @@ items:
     content: |
       Buenas prácticas y herramientas actuales del ecosistema.
 ---
-+++
+```
 ````
