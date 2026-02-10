@@ -1,8 +1,6 @@
 ---
 title: "Contenido - POO en Java"
 description: "Módulos de aprendizaje para dominar Java y la POO (18 Semanas)"
-position: 1
-date: "2026-01-28"
 folder_position: 1
 ---
 
