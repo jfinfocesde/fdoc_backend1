@@ -1,400 +1,260 @@
 ---
-title: "Semana 3: Atributos y Constructores"
-description: "Guía completa sobre atributos de clase, tipos de datos primitivos vs wrappers, conversión, encapsulamiento y el poder de los Getters y Setters."
+title: "Semana 3: Tipos de Datos y Transformación de la Información"
+description: "Guía profunda y completa sobre los cimientos de la memoria en Java: datos primitivos, el poder de las clases envolventes (Wrappers), y las técnicas fundamentales de Casting y Parseo."
 position: 3
 category: "fundamentos"
 difficulty: "beginner"
-tags: ["java", "poo", "atributos", "constructores", "encapsulamiento", "setters", "getters"]
+tags: ["java", "poo", "primitivos", "wrappers", "casting", "parseo", "autoboxing"]
 date: "2026-02-09"
-last_updated: "2026-02-09"
+last_updated: "2026-02-20"
 author: "Cesde Teacher"
 ---
 
 +++hero-section
 ---
-title: "Atributos, Constructores y Encapsulamiento"
-subtitle: "Domina el arte de proteger tus datos: Aprende por qué los atributos privados y los métodos de acceso son la regla de oro en Java."
-backgroundImage: "https://images.unsplash.com/photo-1639322537228-ad7117a76743?q=80&w=2070"
+title: "El ADN de Java: Primitivos, Wrappers y Conversiones"
+subtitle: "Para construir software de calidad comercial, necesitas dominar cómo se almacena, trata y transforma cada byte de tu información."
+backgroundImage: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?q=80&w=2070"
 overlayOpacity: 0.7
 buttons:
-  - text: "Ver Tutorial"
-    url: "#metodos-de-acceso-getters-y-setters"
+  - text: "Comenzar Lectura"
+    url: "#1-los-cimientos-tipos-de-datos-primitivos"
     variant: "primary"
-    icon: "LockClosedIcon"
-  - text: "Documentación Oficial"
-    url: "https://docs.oracle.com/javase/tutorial/java/javaOO/accesscontrol.html"
+    icon: "BookOpenIcon"
+  - text: "Documentación Oracle"
+    url: "https://docs.oracle.com/javase/tutorial/java/nutsandbolts/datatypes.html"
     variant: "secondary"
 ---
 +++
 
-Bienvenidos a la tercera semana. Ya sabemos qué es una clase y un objeto. Ahora vamos a profundizar en sus órganos vitales: **atributos**, **constructores** y, lo más importante, cómo proteger esa información mediante el **encapsulamiento** y los métodos de acceso.
+Bienvenidos a la tercera semana. En nuestro camino hacia el dominio de la programación orientada a objetos (POO) y de Java como lenguaje profesional, es indispensable detenernos en cómo gestionamos la información a un nivel fundamental. 
 
-## Ciclo de Vida de un Dato
-
-Antes de entrar en código, entendamos qué pasa con un dato desde que se piensa hasta que se usa.
-
-+++timeline
-### 1. Declaración | La Definición
-Definimos que existirá una variable de cierto tipo. Aún no tiene valor real.
-`private int edad;`
+En esta guía extensa exploraremos tres pilares críticos:
+1. **Los Datos Primitivos**: La forma más pura, rápida y eficiente de manejar valores en memoria.
+2. **Las Clases Envolventes (Wrapper Classes)**: La técnica de Java para convertir lo primitivo en objetos reales, permitiéndonos interactuar con arquitecturas modernas.
+3. **Casting y Parseo**: Cómo forzar y traducir la información para que fluya de un tipo de dato a otro sin romper nuestras aplicaciones.
 
 ---
 
-### 2. Inicialización | El Nacimiento
-Le asignamos su primer valor, usualmente en el **Constructor**.
-`this.edad = 18;`
+## 1. Los Cimientos: Tipos de Datos Primitivos
+
+Java es un lenguaje tipado estáticamente, lo que significa que el compilador necesita saber qué tipo de dato tendrá cada variable desde el momento en que la declaras. 
+
+A diferencia de muchos lenguajes modernos (como JavaScript o Python), en Java **no todo es un objeto**. Para realizar operaciones a extrema velocidad y ahorrar memoria RAM, Java introdujo los **tipos primitivos**. Estos datos se guardan estrictamente en la memoria *Stack* (una memoria de acceso ultra rápido y tamaño fijo), no tienen métodos asociados (`.algo()`) y **nunca pueden ser nulos (`null`)**.
+
+Java cuenta con exactamente **8 tipos primitivos**, divididos en 4 categorías:
+
+### A. Números Enteros
+No tienen parte decimal. Elegir entre ellos depende exclusivamente de cuánta memoria quieras optimizar y qué tan grande será el número que necesitas almacenar.
+
+*   `byte`: Ocupa solo 1 byte (8 bits). Su rango va de **-128 a 127**. Se usa en sistemas empotrados o procesamiento de archivos a muy bajo nivel.
+*   `short`: Ocupa 2 bytes (16 bits). Su rango va de **-32,768 a 32,767**. Muy poco uso en la cotidianidad empresarial.
+*   `int`: Ocupa 4 bytes (32 bits). Rango de **-2 mil millones a 2 mil millones**. Es el **estándar absoluto** para contadores, edades, identificadores básicos, etc.
+*   `long`: Ocupa 8 bytes (64 bits). Rango inmenso. OBLIGATORIO usarlo cuando manejamos IDs de bases de datos de grandes plataformas, milisegundos de tiempo o distancias en el espacio. **Nota vital:** Debes añadir una `L` al final de su valor: `long habitantes = 8000000000L;`.
+
+### B. Números Decimales (Punto Flotante)
+Manejan fracciones y decimales. En computación, el cálculo decimal siempre tiene un pequeño margen de error interno debido a limitaciones arquitectónicas.
+
+*   `float`: Ocupa 4 bytes. Precisión de hasta 7 cifras decimales. Debes colocar una `f` al final: `float temperatura = 36.5f;`.
+*   `double`: Ocupa 8 bytes. Precisión de hasta 15 cifras decimales. Es el **estándar** en Java para operaciones matemáticas generales y cálculos científicos: `double precio = 19.99;`.
+
+### C. Caracteres
+*   `char`: Ocupa 2 bytes. Almacena **un único símbolo Unicode** (soporta emojis, letras, números, símbolos chinos). Solo permite comillas simples (`' '`), nunca comillas dobles (eso es para los Strings): `char opcion = 'A';`.
+
+### D. Lógicos
+*   `boolean`: Ocupa 1 bit lógicamente (aunque la máquina virtual lo maneje diferente según la arquitectura). Solo tiene dos universos posibles: `true` (verdadero) o `false` (falso). Es el árbitro de tus bucles (`while`) y condiciones (`if`).
 
 ---
 
-### 3. Protección | El Escudo
-Al ser `private`, nadie fuera de la clase puede tocar este dato directamente.
-`obj.edad = -5; // Error de compilación`
+## 2. La Evolución: Clases Envolventes (Wrapper Classes)
 
----
+Si los primitivos son rápidos y eficientes, ¿por qué necesitamos algo más? El problema surge cuando Java interactúa con el mundo exterior o con sus propias características avanzadas. 
 
-### 4. Acceso Controlado | La Puerta
-Usamos métodos públicos para leer (Get) o modificar (Set) el valor bajo nuestras reglas.
-`obj.setEdad(20);`
-+++
+Por ejemplo:
+1. Las Listas dinámicas en Java (`ArrayList`) **no aceptan tipos primitivos**. No puedes tener un `ArrayList<int>`.
+2. Las bases de datos pueden devolver valores vacíos (`NULL`). Si mi base de datos me dice que la edad de un usuario es nula, no puedo guardarlo en la variable primitiva `int edad;` en Java, porque un `int` primitivo jamás puede ser nulo, por defecto vale `0`. (¡Cero y nulo no significan lo mismo en programación!).
 
-## 1. Atributos: Primitivos vs Wrappers
+La solución a esto son las **Clases Envolventes (Wrappers)**. Java toma el humilde valor primitivo, lo mete dentro de una 'caja' (lo envuelve) y lo transforma en un verdadero Objeto almacenado en la memoria *Heap*. Ahora sí, ¡ya tiene métodos, ya puede ser nulo, ya entra en las listas!
 
-En Java, no todo es un objeto. Por razones de rendimiento, existen los tipos "primitivos". Sin embargo, para trabajar con herramientas modernas (como Bases de Datos o JSON), necesitamos sus versiones en "objeto" (Wrappers).
+### Comparativa: La Metamorfosis
 
 ```comparison-table
 ---
 headers:
-  - "Característica"
-  - { text: "Tipos Primitivos", highlight: false }
-  - { text: "Clases Envolventes (Wrappers)", highlight: true }
+  - "Tipo Primitivo"
+  - { text: "Clase Wrapper Correspondiente", highlight: true }
+  - "Características de la Clase Envolvente"
 rows:
-  - ["Naturaleza", "Dato simple (valor puro)", "Objeto (instancia de clase)"]
-  - ["Memoria", "Muy eficiente (Stack)", "Ocupa más espacio (Heap)"]
-  - ["Valor nulo", "No pueden ser null", "Sí pueden ser null"]
-  - ["Métodos", "No tienen métodos", "Tienen métodos útiles (.parseInt(), .toString())"]
-  - ["Uso principal", "Cálculos matemáticos, bucles", "Colecciones (Listas), bases de datos"]
+  - ["byte", "Byte", "Al ser objeto, su valor por defecto si no se inicializa es null."]
+  - ["short", "Short", "Igual que Byte."]
+  - ["int", "Integer", "¡Ojo! Cambia la palabra de int a Integer. Muy usado en List<Integer>."]
+  - ["long", "Long", "Permite manejar IDs nulos traídos de la BD."]
+  - ["float", "Float", "Proporciona constantes como Float.MAX_VALUE."]
+  - ["double", "Double", "Proporciona métodos útiles de conversión matemática."]
+  - ["char", "Character", "¡Ojo! Cambia a Character. Métodos útiles como Character.isDigit('1')."]
+  - ["boolean", "Boolean", "Puede ser true, false o null (Lógica ternaria en BD)."]
 ---
 ```
 
-### Los 8 Tipos Primitivos
+### Autoboxing y Unboxing: Magia Tras Bambalinas
 
-```cards
----
-columns: 4
-items:
-  - title: "Enteros"
-    icon: "CubeIcon"
-    content: |
-      **byte, short, int, long**
-      Desde 8 hasta 64 bits. El `int` es el estándar.
-  - title: "Decimales"
-    icon: "ChartPieIcon"
-    content: |
-      **float, double**
-      Para números con coma. `double` es el más preciso.
-  - title: "Caracteres"
-    icon: "IdentificationIcon"
-    content: |
-      **char**
-      Un solo símbolo Unicode. Se usa con comillas simples 'A'.
-  - title: "Lógicos"
-    icon: "CheckCircleIcon"
-    content: |
-      **boolean**
-      Verdadero o Falso. Indispensable para decisiones.
----
-```
-
-## 2. Métodos de Acceso (Getters y Setters)
-
-```video
----
-src: "https://vimeo.com/1163509797?share=copy&fl=sv&fe=ci"
-title: "Métodos de Acceso (Getters y Setters)"
----
-```
-
-Aquí entramos en el corazón del **Encapsulamiento**. Los Getters y Setters no son simples caprichos de Java; son los guardianes de la integridad de tu software.
-
-### ¿Qué son realmente?
-
-Son métodos públicos simples cuyo único trabajo es **interconectar** el mundo exterior con los datos privados de tu objeto.
-
-*   **Getter (Accesor)**: "Dame el valor". Permite LEER un dato privado.
-*   **Setter (Mutador)**: "Cambia el valor". Permite ESCRIBIR un dato privado (bajo ciertas condiciones).
-
-### Anatomía Detallada
-
-Vamos a diseccionar la sintaxis estándar que usa el 99% de la industria Java.
-
-#### 1. Estructura de un GETTER
+Antes de Java 5, meter y sacar el valor de su "caja" objeto era un dolor de cabeza manual. Hoy en día, Java utiliza un sistema automático llamado *Autoboxing* (Empaque automático) y *Unboxing* (Desempaque automático).
 
 ```java
-//     (1)    (2)          (3)
-    public String getNombre() {
-        return this.nombre; // (4)
-    }
-```
-1.  **Visibilidad Pública**: Debe ser accesible desde fuera.
-2.  **Tipo de Retorno**: DEBE coincidir con el tipo del atributo que devuelve.
-3.  **Convención de Nombre**: `get` + Nombre del atributo (con la primera en mayúscula). CamelCase.
-4.  **Retorno**: Devuelve el valor del atributo interno.
+// AUTOBOXING: El primitivo 10 se envuelve automáticamente en un Objeto Integer.
+Integer numeroObjeto = 10; 
 
-#### 2. Estructura de un SETTER
+// UNBOXING: El objeto se desenvuelve para ser matemático puro de nuevo.
+int primitivoPuro = numeroObjeto; 
+
+// Uso en la vida real (Colecciones):
+List<Integer> edades = new ArrayList<>();
+edades.add(25); // Magia: 25 es un primitivo(int), pero Java le hace Autoboxing a Integer en secreto antes de guardarlo.
+```
+
+---
+
+## 3. Transformación: Casting y Parseo de Datos
+
+En el mundo real, los datos nunca te llegan con la etiqueta perfecta. A veces un descuento llega como un número entero (`int 15`) pero el sistema contable exige un decimal (`double 15.0`). Otras veces, un usuario teclea su edad (`"25"`) en un formulario, pero para el código Java eso es simplemente una cadena de Texto (`String`) con la que no puedes sumar ni restar. 
+
+Para resolver estos choques de tipado, usamos dos herramientas fundamentales: **El Casting** y **El Parseo**. Es vital no confundirlos: sus usos son completamente distintos.
+
+### 3.1 Casting (Ajustar de un numérico a otro)
+
+El **Casteo o Conversión de Tipos** ocurre exclusivamente entre tipos de datos compatibles por naturaleza (por ejemplo, primitivos numéricos entre sí). Consiste en enseñarle a Java que trate un tipo de dato como si fuera de otra capacidad.
+
+#### A. Casteo Implícito (Ensanchamiento / Widening)
+Ocurre automáticamente sin que el programador haga nada. Se da cuando pasamos de un tipo de dato 'pequeño' (que ocupa menos bytes en memoria) a un tipo de dato 'más grande'. Es **100% seguro** y no hay riesgo de perder información.
 
 ```java
-//     (1)  (2)      (3)           (4)
-    public void setNombre(String nombre) {
-        this.nombre = nombre; // (5)
-    }
+int balas = 50;           // La 'caja' de 32 bits tiene el valor 50
+double nivelBateria = balas; // La 'caja' doble de 64 bits engulle al 50. 
+// nivelBateria ahora vale 50.0 automáticamente. No hay errores de compilación.
 ```
-1.  **Visibilidad Pública**: Accesible desde fuera.
-2.  **Void**: Generalmente no devuelve nada (su trabajo es hacer, no decir).
-3.  **Convención de Nombre**: `set` + Nombre del atributo.
-4.  **Parámetro**: Recibe el nuevo valor que queremos asignar.
-5.  **Asignación**: Actualiza el atributo interno con el valor recibido.
 
-### Casos de Uso Avanzados
+#### B. Casteo Explícito (Estrechamiento / Narrowing)
+Esto es forzar a la máquina. Intentas meter un dato de mayor capacidad (o con decimales) en una variable de menor capacidad. **¡Es peligroso!** Existe un riesgo altísimo de **truncamiento** (pérdida de la parte decimal) o de **desbordamiento** (overflow).
 
-No siempre es un simple "entra y sale". Aquí es donde brilla el encapsulamiento.
+Como es peligroso, Java no lo hace automático; te obliga a tomar responsabilidad de la orden escribiendo entre paréntesis el tipo objetivo: `(nuevoTipo)`.
+
+```java
+double notaFinal = 4.8;
+// int notaTrucada = notaFinal; // ❌ ERROR en tiempo de compilación. "Possible loss of precision".
+
+// CASTEO EXPLÍCITO: Le digo a Java: "Sé lo que hago, forzaló y recorta las esquinas"
+int notaTruncada = (int) notaFinal; 
+
+System.out.println(notaTruncada); // Muestra 4. Perdiste el 0.8 en el proceso. NO redondea, RECORTA.
+```
+
+### 3.2 Parseo (Traducir a partir de un String de Texto)
+
+Si intentas hacer un "Casting" de un String a un int (`int e = (int) "25";`) Java se va a quejar radicalmente. "25" en String son simplemente los dibujos de los caracteres '2' y '5' juntos y concatenados, no poseen un valor o lógica aritmética.
+
+Para extraer el verdadero valor numérico atrapado dentro de un texto, debemos convocar el poder de las **Clases Envolventes (Wrappers)** usando sus funciones estáticas de conversión llamadas **`parse...()`**.
 
 ```tabs
----[tab title="1. Validación (La muralla)" lang="java"]---
-public class CuentaBancaria {
-    private double saldo;
-
-    // Getter simple
-    public double getSaldo() {
-        return saldo;
-    }
-
-    // Setter CON VALIDACIÓN
-    // Aquí protegemos la integridad del dato.
-    public void setSaldo(double saldo) {
-        if (saldo >= 0) {
-            this.saldo = saldo;
-        } else {
-            System.out.println("❌ Error: El saldo no puede ser negativo.");
-            // Opcional: lanzar una excepción
-            // throw new IllegalArgumentException("Saldo negativo no permitido");
-        }
+---[tab title="Parsear a Números" lang="java"]---
+public class DemostracionParseo {
+    public static void main(String[] args) {
+        String inputUsuario = "2026";
+        String precioSistema = "9.99";
+        
+        // Usamos los Wrappers como traductores:
+        int anio = Integer.parseInt(inputUsuario);
+        double costo = Double.parseDouble(precioSistema);
+        
+        System.out.println("En 10 años será: " + (anio + 10)); // 2036
+        System.out.println("Costo con envío: " + (costo + 2.0)); // 11.99
     }
 }
----[tab title="2. Propiedad de Solo Lectura" lang="java"]---
-public class Usuario {
-    private String dni; // El DNI no debería cambiar nunca
-
-    public Usuario(String dni) {
-        this.dni = dni;
-    }
-
-    // Solo proveemos Getter.
-    // Al NO existir un Setter, hacemos que el atributo sea INMUTABLE
-    // desde fuera de la clase una vez creado.
-    public String getDni() {
-        return this.dni;
-    }
-}
----[tab title="3. Propiedad Calculada (Virtual)" lang="java"]---
-public class Rectangulo {
-    private double ancho;
-    private double alto;
-
-    // ... constructores y setters para ancho/alto ...
-
-    // Este Getter NO devuelve un atributo directo.
-    // CALCULA un valor en tiempo real. 
-    // Para quien lo usa, parece un atributo más: rect.getArea()
-    public double getArea() {
-        return this.ancho * this.alto;
+---[tab title="Parsear a Booleano" lang="java"]---
+public class LogicaParseo {
+    public static void main(String[] args) {
+        String estadoInterruptor = "true";
+        String trampa = "verdadero";
+        
+        boolean isEncendido = Boolean.parseBoolean(estadoInterruptor); // true
+        
+        // IMPORTANTE: Boolean.parseBoolean() solo devuelve 'true' 
+        // si lee la palabra exacta "true" (ignorando may/minúsculas). 
+        // Cualquier otra palabra del universo devolverá false.
+        boolean esReal = Boolean.parseBoolean(trampa); // false!!
+        
+        System.out.println(isEncendido);
     }
 }
----[tab title="4. El Caso Booleano (is)" lang="java"]---
-public class Tarea {
-    private boolean completada; // true o false
-
-    // Convención Especial:
-    // Para booleanos, en lugar de 'get', usamos 'is'.
-    // Suena más natural: "if (tarea.isCompletada())"
-    public boolean isCompletada() {
-        return completada;
+---[tab title="La Trampa: Excepciones" lang="java"]---
+public class CuidadoParseo {
+    public static void main(String[] args) {
+        String pesoTexto = "setenta"; // El string no es numérico estructurado
+        
+        // ¡BOMBA! Esto compila, pero al ejecutarse la aplicación crasheará por completo.
+        // Ocurrirá un NumberFormatException (Excepción de Formato de Número).
+        int peso = Integer.parseInt(pesoTexto); 
+        
+        // En aplicaciones reales empresariales, SIEMPRE debemos envolver
+        // estas lecturas de Parseo en bloques try-catch que atraparemos en el futuro.
     }
-
-    public void setCompletada(boolean completada) {
-        this.completada = completada;
+}
+---[tab title="Ingeniería Inversa" lang="java"]---
+public class VolverAString {
+    public static void main(String[] args) {
+        // ¿Qué pasa si tengo un double primitivo y necesito enviarlo a React
+        // o pintarlo en un PDF donde todo debe ser Texto (String)?
+        
+        double saldoDolares = 50000.5;
+        
+        // MÉTODO OFICIAL
+        String vistaSaldo = String.valueOf(saldoDolares);
+        
+        // MÉTODO RÁPIDO Y HACKER (Concatenación de cadena vacía):
+        // En Java, sumar (+) cualquier cosa a un string vacío, convierte
+        // esa 'cosa' a String inmediatamente.
+        String vistaTrampa = "" + saldoDolares; 
     }
 }
 ```
 
-### Diagrama de Flujo de Datos
-
-```mermaid
-graph LR
-    User((Usuario)) -->|"1. setEdad(-5)"| Setter["setEdad(int)"]
-    Setter -->|"2. ¿Es > 0?"| Logic{Validación}
-    Logic -- "Sí" --> Save["Guardar en private edad"]
-    Logic -- "No" --> Error["Lanzar Error"]
-    
-    User -->|"3. getEdad()"| Getter["getEdad()"]
-    Save -.->|"4. Leer valor"| Getter
-    Getter -->|"5. Retornar"| User
-    
-    style Setter fill:#f9f,stroke:#333
-    style Getter fill:#bbf,stroke:#333
-    style Save fill:#bfb,stroke:#333
-```
-
-## 3. Constructores: El Origen
-
-```video
 ---
-src: "https://vimeo.com/1163506306?share=copy&fl=sv&fe=ci"
-title: "Constructores"
----
-```
-
-El constructor es el método especial que se ejecuta **automáticamente** al crear una instancia (`new`). Su misión es inicializar el objeto.
-
-### Visualizando la Invocación
-
-```mermaid
-sequenceDiagram
-    participant Main
-    participant Memoria
-    participant Constructor
-    
-    Main->>Memoria: new Usuario("Ana")
-    Note right of Memoria: Reserva espacio RAM
-    Memoria->>Constructor: Ejecutar Usuario(String)
-    Constructor->>Memoria: this.nickname = "Ana"
-    Constructor-->>Main: Retorna referencia
-```
-
-### Tipos de Constructores
-
-```accordion
----
-allowMultiple: true
----
-### Constructor Por Defecto (Implícito)
-Si no escribes NINGÚN constructor, Java crea uno vacío e invisible por ti. Desaparece apenas escribes uno propio.
-
-### Constructor Vacío (No-args)
-Es aquel que definimos explícitamente sin parámetros. Útil para crear objetos "vacíos" y llenarlos luego con `setters`.
-
-### Constructor Parametrizado
-Recibe argumentos para obligar a que el objeto nazca con datos. Es la forma más segura de crear objetos consistentes.
-```
-
-### Sobrecarga de Constructores (Overloading)
-
-Podemos tener múltiples formas de crear un mismo objeto.
-
-```tabs
----[tab title="Usuario.java" lang="java"]---
-public class Usuario {
-    private String nombre;
-    private int nivel;
-
-    // Opción 1: Crear usuario básico
-    public Usuario() {
-        this.nombre = "Invitado";
-        this.nivel = 1;
-    }
-
-    // Opción 2: Crear con nombre
-    public Usuario(String nombre) {
-        this.nombre = nombre;
-        this.nivel = 1;
-    }
-
-    // Opción 3: Crear usuario avanzado
-    public Usuario(String nombre, int nivel) {
-        this.nombre = nombre;
-        this.nivel = nivel;
-    }
-}
-```
 
 +++quiz
 ---
 questions:
-  - text: "¿Qué método se usa para leer a un atributo booleano?"
+  - text: "¿Qué sucederá matemáticamente si ejecutamos la instrucción `int a = (int) 7.99;` en Java?"
     choices:
-      - getActivo()
-      - isActivo()
-      - readActivo()
-      - booleanActivo()
-    answer: "isActivo()"
-  - text: "Si quiero que un atributo sea de solo lectura, ¿qué debo hacer?"
+      - a será igual a 7 porque el casting pierde la parte decimal y en ningún caso redondea automáticamente.
+      - a será igual a 8 porque Java aplicará un redondeo científico cercano por defecto.
+      - Habrá un error en tiempo de compilación que no te permitirá iniciar el programa.
+      - Guardará 7.99 temporalmente pero no te dejará usar la variable a matemáticamente.
+    answer: "a será igual a 7 porque el casting pierde la parte decimal y en ningún caso redondea automáticamente."
+  - text: "¿Qué método utilizas si estás leyendo un archivo de Excel y obtienes la cadena `\"false\"`, pero lo tú que necesitas para tu ciclo if en Java es evaluar el primitivo booleano como tal?"
     choices:
-      - Ponerlo public
-      - Crear solo el Getter y no el Setter
-      - Crear solo el Setter
-      - Usar la palabra clave 'readonly'
-    answer: "Crear solo el Getter y no el Setter"
-  - text: "¿Dónde es el mejor lugar para validar que un dato sea correcto?"
+      - (boolean) \"false\";
+      - Boolean.parseBoolean(\"false\");
+      - String.toBool(\"false\");
+      - Integer.parseBoolean(\"false\");
+    answer: "Boolean.parseBoolean(\"false\");"
+  - text: "¿Cuál es el propósito principal y la mayor ventaja de usar el Wrapper `Integer` en vez del primitivo `int` en una aplicación comercial?"
     choices:
-      - En el método main
-      - En el Getter
-      - En el Setter
-      - En la base de datos
-    answer: "En el Setter"
+      - Acelerar el procesamiento de ciclos iterativos *for* y *while* al acceder de forma directa en el procesador gráfico a operaciones de Stack.
+      - Poder asignarles nulo (`null`) en caso de representar variables que provengan vacías desde bases de datos externas y poder usarlos dentro de Estructuras Dinámicas como Colecciones o Listas (`List<Integer>`).
+      - Minimizar el uso general de la memoria física de la máquina y maximizar el *Garbage Collector*.
+      - Ninguna ventaja. Ya que Java 9 está prohibido utilizar Integer en pos de `int`.
+    answer: "Poder asignarles nulo (`null`) en caso de representar variables que provengan vacías desde bases de datos externas y poder usarlos dentro de Estructuras Dinámicas como Colecciones o Listas (`List<Integer>`)."
 ---
 +++
-
-## 4. Conversión de Datos (Extra)
-
-### Casteo y Parseo
-
-A menudo los datos no llegan en el formato que necesitamos. Aquí es donde entran estas dos técnicas.
-
-```tabs
----[tab title="Casteo (Casting)" lang="java"]---
-// EL CASTEO es forzar un tipo de dato a comportarse como otro compatible.
-
-public class EjemploCasteo {
-    public static void main(String[] args) {
-        
-        // 1. Casteo Implícito (Automático)
-        // De pequeño a grande, no hay riesgo de pérdida.
-        int entero = 100;
-        double decimal = entero; // 100.0
-        
-        // 2. Casteo Explícito (Manual)
-        // De grande a pequeño, ¡PELIGRO de pérdida de datos!
-        double precio = 99.99;
-        int precioEntero = (int) precio; // Se trunca a 99
-        
-        System.out.println("Precio casteado: " + precioEntero); // 99
-    }
-}
-
----[tab title="Parseo (Parsing)" lang="java"]---
-// EL PARSEO es convertir Texto (String) a Número.
-// Es vital al leer inputs de usuario o archivos.
-
-public class EjemploParseo {
-    public static void main(String[] args) {
-        String edadTexto = "25";
-        
-        // Usamos los métodos estáticos de las Clases Wrapper
-        int edad = Integer.parseInt(edadTexto);
-        double precio = Double.parseDouble("1500.50");
-        
-        // Ahora sí podemos operar
-        System.out.println("Edad futura: " + (edad + 5)); // 30
-    }
-}
-```
 
 ```admonition
 ---
 type: tip
-title: "Reto Semanal"
+title: "Reto Laboratorio: La Terminal del Cajero Bancario"
 ---
-Crea una clase `Termostato` con un atributo privado `temperatura`. 
-1. El Getter debe devolver la temperatura en grados Celsius.
-2. Crea un método extra `getTemperaturaFahrenheit()` que devuelva el cálculo convertido (Propiedad Calculada).
-3. El Setter debe impedir que la temperatura sea menor a -273°C (Cero Absoluto).
+Vas a simular el proceso de fondo de un cajero que procesa dinero con variables de texto:
+
+1. El sistema lee un monto depositado por el usuario con texto plano: `String depositoTexto = "250.75";`.
+2. Necesitas que tu programa sume este depósito a un saldo base: `double saldoCuenta = 1000.0;`. Por lo tanto, extrae limpiamente el número del String mediante un **Parseo a Wrapper** correcto.
+3. Ahora suma el número depositado más tu saldo real e imprímelo en la terminal.
+4. El cajero, por razones de política de seguridad del banco por fraude tributario en depósitos internacionales, te indica que debe forzosamente descartar (eliminar) los valores en centavos para registros fiscales internos del log: Genera una última variable de nombre `int saldoFiscal`, toma el monto total actual de la cuenta, realízale un **Casting Explícito (Narrowing)** a tipo de dato entero para forzar la amputación de los decimales, e imprímelo al final.
 ```
