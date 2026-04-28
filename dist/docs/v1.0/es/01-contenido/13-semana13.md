@@ -138,7 +138,7 @@ A continuación, veremos dos ejemplos prácticos completos de cómo un gestor de
 ---
 
 
-# Proyecto Demo: Consumo de API REST con Retrofit
+## Proyecto Demo: Consumo de API REST con Retrofit
 
 Este proyecto es un ejemplo básico de cómo consumir una API REST desde Java usando la librería **Retrofit**. El programa obtiene una lista de usuarios de una API mock, realiza todas las operaciones CRUD (Crear, Leer, Actualizar, Eliminar) y las imprime en consola.
 
@@ -610,7 +610,7 @@ Para ejecutar este proyecto necesitas:
 
 ---
 
-# Proyecto Demo2: Juego 2D con FXGL
+## Proyecto Demo2: Juego 2D con FXGL
 
 Este proyecto es un ejemplo básico de cómo crear un juego 2D simple usando **FXGL** (un framework de juegos basado en JavaFX). El programa muestra una ventana con un personaje cuadrado de color azul que puede moverse con las teclas WASD.
 
@@ -618,7 +618,7 @@ Este proyecto es un ejemplo básico de cómo crear un juego 2D simple usando **F
 
 ## 1. Estructura del Proyecto
 
-```
+```bash
 demo2/
 ├── pom.xml                                    # Configuración de Maven (dependencias)
 ├── README.md                                  # Esta documentación
@@ -899,7 +899,7 @@ Una vez que entiendas este ejemplo básico, puedes:
 | **JavaFX** | Biblioteca gráfica de Java que FXGL utiliza internamente |
 ---
 
-# Proyecto Demo3: Generador de PDF con OpenPDF
+## Proyecto Demo3: Generador de PDF con OpenPDF
 
 Este proyecto es un ejemplo básico de cómo crear documentos PDF usando **OpenPDF** (una librería Java de código abierto). El programa genera un archivo PDF simple con un título y datos de ejemplo.
 
@@ -907,7 +907,7 @@ Este proyecto es un ejemplo básico de cómo crear documentos PDF usando **OpenP
 
 ## 1. Estructura del Proyecto
 
-```
+```bash
 demo3/
 ├── pom.xml                    # Configuración de Maven (dependencias)
 ├── README.md                  # Esta documentación
