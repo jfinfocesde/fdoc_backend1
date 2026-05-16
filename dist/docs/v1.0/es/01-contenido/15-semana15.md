@@ -20,7 +20,7 @@ Este proyecto ha sido diseñado para ser **adaptado a la propuesta de cada equip
 ## Enlace del Repositorio
 
 Puedes encontrar el código fuente y las actualizaciones en el siguiente enlace:
-👉 [https://github.com/tu-usuario/proyecto-integrador](https://github.com/tu-usuario/proyecto-integrador) 
-*(Sustituir por el enlace real del repositorio del curso/equipo)*
+👉 [https://github.com/jfinforecursos/Proyecto-Integrador-Backend1.git](https://github.com/jfinforecursos/Proyecto-Integrador-Backend1.git) 
+
 
 ---
